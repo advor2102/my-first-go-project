@@ -11,18 +11,20 @@ import "fmt"
 // Lesson 5 Homework
 
 var (
-	first_number  int
-	second_number int
+	devidend int
+	devisor  int
+	quotient int
 )
 
 func main() {
 	fmt.Println("Please enter the first number: ")
-	fmt.Scan(&first_number)
+	fmt.Scan(&devidend)
 	fmt.Println("Please enter the second number: ")
-	fmt.Scan(&second_number)
-	if second_number == 0 {
+	fmt.Scan(&devisor)
+	if devisor == 0 {
 		fmt.Println("ZeroDivisionError")
 	} else {
-		fmt.Println(first_number / second_number)
+		quotient = devidend / devisor
+		fmt.Println(quotient)
 	}
 }
