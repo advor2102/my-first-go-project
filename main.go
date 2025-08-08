@@ -16,15 +16,18 @@ var (
 	quotient int
 )
 
+func devide(devidend, devisor int) (int, error) {
+	if devisor == 0 {
+		return 0, fmt.Errorf("ZeroDivisionError")
+	}
+	quotient = devidend / devisor
+	return quotient, nil
+}
+
 func main() {
 	fmt.Println("Please enter the first number: ")
 	fmt.Scan(&devidend)
 	fmt.Println("Please enter the second number: ")
 	fmt.Scan(&devisor)
-	if devisor == 0 {
-		fmt.Println("ZeroDivisionError")
-	} else {
-		quotient = devidend / devisor
-		fmt.Println(quotient)
-	}
+	fmt.Println(devide(devidend, devisor))
 }
