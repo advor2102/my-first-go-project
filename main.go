@@ -9,6 +9,7 @@ import "fmt"
 // }
 
 // Lesson 5 Homework
+
 var (
 	first_number  int
 	second_number int
@@ -19,5 +20,9 @@ func main() {
 	fmt.Scan(&first_number)
 	fmt.Println("Please enter the second number: ")
 	fmt.Scan(&second_number)
-	fmt.Println(first_number, second_number)
+	if second_number == 0 {
+		fmt.Println("ZeroDivisionError")
+	} else {
+		fmt.Println(first_number / second_number)
+	}
 }
