@@ -31,9 +31,17 @@ func division(dividend, devisor float64) (float64, error) {
 func main() {
 	for {
 		fmt.Println("Please enter the first number: ")
-		fmt.Scan(&dividend)
+		_, err := fmt.Scan(&dividend)
+		if err != nil {
+			fmt.Println("Error: You should enter number")
+			continue
+		}
 		fmt.Println("Please enter the second number: ")
-		fmt.Scan(&devisor)
+		_, err = fmt.Scan(&devisor)
+		if err != nil {
+			fmt.Println("Error: You should enter number")
+			continue
+		}
 		divisionResult, zeroDivisionError := division(dividend, devisor)
 		if zeroDivisionError != nil {
 			fmt.Println(zeroDivisionError)
