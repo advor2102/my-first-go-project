@@ -29,5 +29,11 @@ func main() {
 	fmt.Scan(&dividend)
 	fmt.Println("Please enter the second number: ")
 	fmt.Scan(&devisor)
-	fmt.Println(divide(dividend, devisor))
+	result, zerodivisionerror := divide(dividend, devisor)
+	if zerodivisionerror != nil {
+		fmt.Println(zerodivisionerror)
+	} else {
+		fmt.Println(result)
+	}
+
 }
