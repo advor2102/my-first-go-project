@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Lesson 4 Homework
 
@@ -11,12 +14,13 @@ import "fmt"
 // Lesson 5 Homework
 
 var (
-	dividend int
-	devisor  int
-	quotient int
+	dividend   float64
+	devisor    float64
+	quotient   float64
+	userAnswer string
 )
 
-func divide(dividend, devisor int) (int, error) {
+func divide(dividend, devisor float64) (float64, error) {
 	if devisor == 0 {
 		return 0, fmt.Errorf("ZeroDivisionError")
 	}
@@ -25,24 +29,31 @@ func divide(dividend, devisor int) (int, error) {
 }
 
 func main() {
-	fmt.Println("Please enter the first number: ")
-	fmt.Scan(&dividend)
-	fmt.Println("Please enter the second number: ")
-	fmt.Scan(&devisor)
-	divisionResult, zeroDivisionError := divide(dividend, devisor)
-	if zeroDivisionError != nil {
-		fmt.Println(zeroDivisionError)
-	} else {
-		fmt.Println(divisionResult)
-		switch {
-		case divisionResult > 10:
-			fmt.Println("Результат большой")
-		case divisionResult == 1 && divisionResult <= 10:
-			fmt.Println("Результат средний")
-		default:
-			fmt.Println("Результат маленький или ноль")
+	for {
+		fmt.Println("Please enter the first number: ")
+		fmt.Scan(&dividend)
+		fmt.Println("Please enter the second number: ")
+		fmt.Scan(&devisor)
+		divisionResult, zeroDivisionError := divide(dividend, devisor)
+		if zeroDivisionError != nil {
+			fmt.Println(zeroDivisionError)
+		} else {
+			fmt.Println(divisionResult)
+			switch {
+			case divisionResult > 10:
+				fmt.Println("Результат большой")
+			case divisionResult == 1 && divisionResult <= 10:
+				fmt.Println("Результат средний")
+			default:
+				fmt.Println("Результат маленький или ноль")
+			}
 		}
-
+		fmt.Println("Do you want to use another numbers?(y/n)")
+		fmt.Scan(&userAnswer)
+		if strings.ToLower(userAnswer) == "y" {
+			continue
+		} else if strings.ToLower(userAnswer) == "n" {
+			break
+		}
 	}
-
 }
