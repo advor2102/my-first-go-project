@@ -29,11 +29,20 @@ func main() {
 	fmt.Scan(&dividend)
 	fmt.Println("Please enter the second number: ")
 	fmt.Scan(&devisor)
-	result, zerodivisionerror := divide(dividend, devisor)
-	if zerodivisionerror != nil {
-		fmt.Println(zerodivisionerror)
+	divisionResult, zeroDivisionError := divide(dividend, devisor)
+	if zeroDivisionError != nil {
+		fmt.Println(zeroDivisionError)
 	} else {
-		fmt.Println(result)
+		fmt.Println(divisionResult)
+		switch {
+		case divisionResult > 10:
+			fmt.Println("Результат большой")
+		case divisionResult == 1 && divisionResult <= 10:
+			fmt.Println("Результат средний")
+		default:
+			fmt.Println("Результат маленький или ноль")
+		}
+
 	}
 
 }
