@@ -33,7 +33,7 @@ func main() {
 		fmt.Println("Please enter the first number: ")
 		_, err := fmt.Scan(&dividend)
 		if err != nil {
-			fmt.Println("Error: You should enter number")
+			fmt.Println("error: you should enter number")
 			fmt.Println("Do you want to use another numbers?(y/n)")
 			fmt.Scan(&userAnswer)
 			if strings.ToLower(userAnswer) == "y" {
@@ -45,7 +45,7 @@ func main() {
 		fmt.Println("Please enter the second number: ")
 		_, err = fmt.Scan(&devisor)
 		if err != nil {
-			fmt.Println("Error: You should enter number")
+			fmt.Println("error: you should enter number")
 			fmt.Println("Do you want to use another numbers?(y/n)")
 			fmt.Scan(&userAnswer)
 			if strings.ToLower(userAnswer) == "y" {
