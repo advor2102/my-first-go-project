@@ -20,7 +20,7 @@ var (
 	userAnswer string
 )
 
-func divide(dividend, devisor float64) (float64, error) {
+func division(dividend, devisor float64) (float64, error) {
 	if devisor == 0 {
 		return 0, fmt.Errorf("ZeroDivisionError")
 	}
@@ -34,7 +34,7 @@ func main() {
 		fmt.Scan(&dividend)
 		fmt.Println("Please enter the second number: ")
 		fmt.Scan(&devisor)
-		divisionResult, zeroDivisionError := divide(dividend, devisor)
+		divisionResult, zeroDivisionError := division(dividend, devisor)
 		if zeroDivisionError != nil {
 			fmt.Println(zeroDivisionError)
 		} else {
