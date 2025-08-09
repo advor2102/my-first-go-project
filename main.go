@@ -22,7 +22,7 @@ var (
 
 func division(dividend, devisor float64) (float64, error) {
 	if devisor == 0 {
-		return 0, fmt.Errorf("ZeroDivisionError")
+		return 0, fmt.Errorf("error: you can't divide by zero")
 	}
 	quotient = dividend / devisor
 	return quotient, nil
@@ -34,13 +34,25 @@ func main() {
 		_, err := fmt.Scan(&dividend)
 		if err != nil {
 			fmt.Println("Error: You should enter number")
-			continue
+			fmt.Println("Do you want to use another numbers?(y/n)")
+			fmt.Scan(&userAnswer)
+			if strings.ToLower(userAnswer) == "y" {
+				continue
+			} else if strings.ToLower(userAnswer) == "n" {
+				break
+			}
 		}
 		fmt.Println("Please enter the second number: ")
 		_, err = fmt.Scan(&devisor)
 		if err != nil {
 			fmt.Println("Error: You should enter number")
-			continue
+			fmt.Println("Do you want to use another numbers?(y/n)")
+			fmt.Scan(&userAnswer)
+			if strings.ToLower(userAnswer) == "y" {
+				continue
+			} else if strings.ToLower(userAnswer) == "n" {
+				break
+			}
 		}
 		divisionResult, zeroDivisionError := division(dividend, devisor)
 		if zeroDivisionError != nil {
