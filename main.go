@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // Lesson 4 Homework
 
 // func main() {
@@ -72,6 +74,14 @@ package main
 // 		}
 // 	}
 // }
-func main() {
 
+// Lesson 6 Homework
+
+func sum(fTerm int, sTerm int) int {
+	sum := fTerm + sTerm
+	return sum
+}
+
+func main() {
+	fmt.Print(sum(5, 6))
 }
