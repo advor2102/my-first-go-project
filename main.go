@@ -82,6 +82,13 @@ func sum(fTerm int, sTerm int) int {
 	return sum
 }
 
+func division(dividend int, devisor int) (int, float64) {
+	quotient := dividend / devisor
+	remainder := dividend % devisor
+	return quotient, float64(remainder)
+}
+
 func main() {
-	fmt.Print(sum(5, 6))
+	fmt.Println(sum(5, 6))
+	fmt.Println(division(10, 3))
 }
