@@ -100,9 +100,7 @@ func division(dividend int, devisor int) (int, float64) {
 }
 
 func unite(fSlice []int, sSlice []int) []int {
-	for i, _ := range sSlice {
-		fSlice = append(fSlice, sSlice[i])
-	}
+	fSlice = append(fSlice, sSlice...)
 	return fSlice
 }
 
