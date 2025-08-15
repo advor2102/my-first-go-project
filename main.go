@@ -79,6 +79,7 @@ import "fmt"
 
 var arr = [5]int{1, 2, 3, 4, 5}
 var slice = []int{1, 2, 3, 4, 5}
+var ages = map[string]int{"Ann": 30, "John": 45, "Marie": 28}
 
 func sum(fTerm int, sTerm int) int {
 	sum := fTerm + sTerm
@@ -113,4 +114,5 @@ func main() {
 	fmt.Println(slice)
 	fmt.Println(newSlice)
 	fmt.Print(unite(slice, newSlice))
+	fmt.Println(ages)
 }
