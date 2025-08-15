@@ -85,10 +85,12 @@ func sum(fTerm int, sTerm int) int {
 	return sum
 }
 
-func doubling(nums []int) {
-	for i := range nums {
-		nums[i] *= 2
+func doubling(nums []int) []int {
+	newSlice := make([]int, len(nums))
+	for i, v := range nums {
+		newSlice[i] = v * 2
 	}
+	return newSlice
 }
 
 func division(dividend int, devisor int) (int, float64) {
@@ -101,6 +103,7 @@ func main() {
 	fmt.Println(sum(5, 6))
 	fmt.Println(division(10, 3))
 	fmt.Println(arr)
-	doubling(slice)
+	fmt.Println(slice)
+	fmt.Println(doubling(slice))
 	fmt.Println(slice)
 }
