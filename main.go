@@ -77,12 +77,21 @@ import "fmt"
 
 // Lesson 6 Homework
 
+type Person struct {
+	Name   string
+	Salary int
+}
+
 var arr = [5]int{1, 2, 3, 4, 5}
 var slice = []int{1, 2, 3, 4, 5}
 var ages = map[string]int{
 	"Ann":   30,
 	"John":  45,
 	"Marie": 28,
+}
+var employee = Person{
+	Name:   "Jorge",
+	Salary: 1000,
 }
 
 func sum(fTerm int, sTerm int) int {
@@ -117,6 +126,7 @@ func main() {
 	newSlice := doubling(slice)
 	fmt.Println(slice)
 	fmt.Println(newSlice)
-	fmt.Print(unite(slice, newSlice))
+	fmt.Println(unite(slice, newSlice))
 	fmt.Println(ages)
+	fmt.Println(employee)
 }
