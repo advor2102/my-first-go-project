@@ -93,6 +93,7 @@ var employee = Person{
 	Name:   "Jorge",
 	Salary: 1000,
 }
+var namesList = []string{"Ann", "Bob", "John", "Michael", "Bob", "Ann", "Lisa", "Bob"}
 
 func sum(fTerm int, sTerm int) int {
 	sum := fTerm + sTerm
@@ -126,6 +127,14 @@ func perimeter(a int) int {
 	return 2 * a
 }
 
+func nameCounter(people []string) map[string]int {
+	counter := make(map[string]int)
+	for _, v := range people {
+		counter[v] += 1
+	}
+	return counter
+}
+
 func main() {
 	fmt.Println(sum(5, 6))
 	fmt.Println(division(10, 3))
@@ -148,4 +157,5 @@ func main() {
 	fmt.Println(employee)
 	b := usingFunc(5, perimeter)
 	fmt.Println(b)
+	fmt.Println(nameCounter(namesList))
 }
