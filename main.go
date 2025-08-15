@@ -128,5 +128,14 @@ func main() {
 	fmt.Println(newSlice)
 	fmt.Println(unite(slice, newSlice))
 	fmt.Println(ages)
+	delete(ages, "Ann")
+	value, exists := ages["Ann"]
+	// fmt.Println(value, exist)
+	if exists {
+		fmt.Println(value)
+	} else {
+		fmt.Println("No data")
+	}
+	fmt.Println(ages)
 	fmt.Println(employee)
 }
