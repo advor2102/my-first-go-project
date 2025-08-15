@@ -77,9 +77,18 @@ import "fmt"
 
 // Lesson 6 Homework
 
+var arr = [5]int{1, 2, 3, 4, 5}
+var slice = []int{1, 2, 3, 4, 5}
+
 func sum(fTerm int, sTerm int) int {
 	sum := fTerm + sTerm
 	return sum
+}
+
+func doubling(nums []int) {
+	for i := range nums {
+		nums[i] *= 2
+	}
 }
 
 func division(dividend int, devisor int) (int, float64) {
@@ -91,4 +100,7 @@ func division(dividend int, devisor int) (int, float64) {
 func main() {
 	fmt.Println(sum(5, 6))
 	fmt.Println(division(10, 3))
+	fmt.Println(arr)
+	doubling(slice)
+	fmt.Println(slice)
 }
