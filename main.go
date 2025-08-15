@@ -118,6 +118,14 @@ func unite(fSlice []int, sSlice []int) []int {
 	return fSlice
 }
 
+func usingFunc(n int, f func(int) int) int {
+	return f(n)
+}
+
+func perimeter(a int) int {
+	return 2 * a
+}
+
 func main() {
 	fmt.Println(sum(5, 6))
 	fmt.Println(division(10, 3))
@@ -138,4 +146,6 @@ func main() {
 	}
 	fmt.Println(ages)
 	fmt.Println(employee)
+	b := usingFunc(5, perimeter)
+	fmt.Println(b)
 }
