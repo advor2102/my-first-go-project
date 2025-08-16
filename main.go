@@ -182,16 +182,28 @@ var employee1 = Employee{
 	Salary:   1000,
 }
 var employeeList []Employee
+var posSal = make(map[string]float64)
 
 func addEmployee(name string, age int, position string, salary float64) {
 	newEmployee := Employee{Name: name, Age: age, Position: position, Salary: salary}
 	employeeList = append(employeeList, newEmployee)
 }
 
+func updateMap() {
+	for i := range employeeList {
+		posSal[employeeList[i].Position] = employeeList[i].Salary
+	}
+}
+
 func main() {
-	employee1.info()
 	employeeList = append(employeeList, employee1)
 	fmt.Println(employeeList)
 	addEmployee("Sarah", 25, "Account", 500.00)
 	fmt.Println(employeeList)
+	updateMap()
+	fmt.Println(posSal)
+	employeeList[0].info()
+	addEmployee("Bob", 40, "Sales", 1500.00)
+	updateMap()
+	fmt.Println(posSal)
 }
