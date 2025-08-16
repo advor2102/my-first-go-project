@@ -183,8 +183,15 @@ var employee1 = Employee{
 }
 var employeeList []Employee
 
+func addEmployee(name string, age int, position string, salary float64) {
+	newEmployee := Employee{Name: name, Age: age, Position: position, Salary: salary}
+	employeeList = append(employeeList, newEmployee)
+}
+
 func main() {
 	employee1.info()
 	employeeList = append(employeeList, employee1)
+	fmt.Println(employeeList)
+	addEmployee("Sarah", 25, "Account", 500.00)
 	fmt.Println(employeeList)
 }
