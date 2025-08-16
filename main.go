@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Lesson 4 Homework
 
@@ -161,6 +163,10 @@ import "fmt"
 
 // Lesson 7 Homework
 
+// type PrintableI interface{
+// 	Print()
+// }
+
 type Employee struct {
 	Name     string
 	Age      int
@@ -173,6 +179,15 @@ func (e Employee) info() {
 	fmt.Printf("Employee age: %d\n", e.Age)
 	fmt.Printf("Employee position: %s\n", e.Position)
 	fmt.Printf("Employee name: %.2f\n", e.Salary)
+}
+
+func printTable() {
+	for i := range employeeList {
+		fmt.Printf("Employee name: %s\n", employeeList[i].Name)
+		fmt.Printf("Employee age: %d\n", employeeList[i].Age)
+		fmt.Printf("Employee position: %s\n", employeeList[i].Position)
+		fmt.Printf("Employee name: %.2f\n", employeeList[i].Salary)
+	}
 }
 
 var employee1 = Employee{
@@ -206,4 +221,5 @@ func main() {
 	addEmployee("Bob", 40, "Sales", 1500.00)
 	updateMap()
 	fmt.Println(posSal)
+	printTable()
 }
