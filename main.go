@@ -77,85 +77,90 @@ import "fmt"
 
 // Lesson 6 Homework
 
-type Person struct {
-	Name   string
-	Salary int
-}
+// type Person struct {
+// 	Name   string
+// 	Salary int
+// }
 
-var arr = [5]int{1, 2, 3, 4, 5}
-var slice = []int{1, 2, 3, 4, 5}
-var ages = map[string]int{
-	"Ann":   30,
-	"John":  45,
-	"Marie": 28,
-}
-var employee = Person{
-	Name:   "Jorge",
-	Salary: 1000,
-}
-var namesList = []string{"Ann", "Bob", "John", "Michael", "Bob", "Ann", "Lisa", "Bob"}
+// var arr = [5]int{1, 2, 3, 4, 5}
+// var slice = []int{1, 2, 3, 4, 5}
+// var ages = map[string]int{
+// 	"Ann":   30,
+// 	"John":  45,
+// 	"Marie": 28,
+// }
+// var employee = Person{
+// 	Name:   "Jorge",
+// 	Salary: 1000,
+// }
+// var namesList = []string{"Ann", "Bob", "John", "Michael", "Bob", "Ann", "Lisa", "Bob"}
 
-func sum(fTerm int, sTerm int) int {
-	sum := fTerm + sTerm
-	return sum
-}
+// func sum(fTerm int, sTerm int) int {
+// 	sum := fTerm + sTerm
+// 	return sum
+// }
 
-func doubling(nums []int) []int {
-	doubleSlice := make([]int, len(nums))
-	for i, v := range nums {
-		doubleSlice[i] = v * 2
-	}
-	return doubleSlice
-}
+// func doubling(nums []int) []int {
+// 	doubleSlice := make([]int, len(nums))
+// 	for i, v := range nums {
+// 		doubleSlice[i] = v * 2
+// 	}
+// 	return doubleSlice
+// }
 
-func division(dividend int, devisor int) (int, float64) {
-	quotient := dividend / devisor
-	remainder := dividend % devisor
-	return quotient, float64(remainder)
-}
+// func division(dividend int, devisor int) (int, float64) {
+// 	quotient := dividend / devisor
+// 	remainder := dividend % devisor
+// 	return quotient, float64(remainder)
+// }
 
-func unite(fSlice []int, sSlice []int) []int {
-	fSlice = append(fSlice, sSlice...)
-	return fSlice
-}
+// func unite(fSlice []int, sSlice []int) []int {
+// 	fSlice = append(fSlice, sSlice...)
+// 	return fSlice
+// }
 
-func usingFunc(n int, f func(int) int) int {
-	return f(n)
-}
+// func usingFunc(n int, f func(int) int) int {
+// 	return f(n)
+// }
 
-func perimeter(a int) int {
-	return 2 * a
-}
+// func perimeter(a int) int {
+// 	return 2 * a
+// }
 
-func nameCounter(people []string) map[string]int {
-	counter := make(map[string]int)
-	for _, v := range people {
-		counter[v] += 1
-	}
-	return counter
-}
+// func nameCounter(people []string) map[string]int {
+// 	counter := make(map[string]int)
+// 	for _, v := range people {
+// 		counter[v] += 1
+// 	}
+// 	return counter
+// }
+
+// func main() {
+// 	fmt.Println(sum(5, 6))
+// 	fmt.Println(division(10, 3))
+// 	fmt.Println(arr)
+// 	fmt.Println(slice)
+// 	newSlice := doubling(slice)
+// 	fmt.Println(slice)
+// 	fmt.Println(newSlice)
+// 	fmt.Println(unite(slice, newSlice))
+// 	fmt.Println(ages)
+// 	delete(ages, "Ann")
+// 	value, exists := ages["Ann"]
+// 	if exists {
+// 		fmt.Println(value)
+// 	} else {
+// 		fmt.Println("No data")
+// 	}
+// 	fmt.Println(ages)
+// 	fmt.Println(employee)
+// 	b := usingFunc(5, perimeter)
+// 	fmt.Println(b)
+// 	fmt.Println(nameCounter(namesList))
+// }
+
+// Lesson 7 Homework
 
 func main() {
-	fmt.Println(sum(5, 6))
-	fmt.Println(division(10, 3))
-	fmt.Println(arr)
-	fmt.Println(slice)
-	newSlice := doubling(slice)
-	fmt.Println(slice)
-	fmt.Println(newSlice)
-	fmt.Println(unite(slice, newSlice))
-	fmt.Println(ages)
-	delete(ages, "Ann")
-	value, exists := ages["Ann"]
-	// fmt.Println(value, exist)
-	if exists {
-		fmt.Println(value)
-	} else {
-		fmt.Println("No data")
-	}
-	fmt.Println(ages)
-	fmt.Println(employee)
-	b := usingFunc(5, perimeter)
-	fmt.Println(b)
-	fmt.Println(nameCounter(namesList))
+	fmt.Println("Hello")
 }
