@@ -181,7 +181,10 @@ var employee1 = Employee{
 	Position: "Manager",
 	Salary:   1000,
 }
+var employeeList []Employee
 
 func main() {
 	employee1.info()
+	employeeList = append(employeeList, employee1)
+	fmt.Println(employeeList)
 }
