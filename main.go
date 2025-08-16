@@ -161,14 +161,21 @@ import "fmt"
 
 // Lesson 7 Homework
 
-type employee struct {
+type Employee struct {
 	Name     string
 	Age      int
 	Position string
 	Salary   float64
 }
 
-var employee1 = employee{
+func (e Employee) info() {
+	fmt.Printf("Employee name: %s\n", e.Name)
+	fmt.Printf("Employee age: %d\n", e.Age)
+	fmt.Printf("Employee position: %s\n", e.Position)
+	fmt.Printf("Employee name: %.2f\n", e.Salary)
+}
+
+var employee1 = Employee{
 	Name:     "John",
 	Age:      35,
 	Position: "Manager",
@@ -176,5 +183,5 @@ var employee1 = employee{
 }
 
 func main() {
-	fmt.Println(employee1)
+	employee1.info()
 }
