@@ -181,12 +181,12 @@ func (e Employee) info() {
 	fmt.Printf("Employee name: %.2f\n", e.Salary)
 }
 
-func printTable() {
-	for i := range employeeList {
-		fmt.Printf("Employee name: %s\n", employeeList[i].Name)
-		fmt.Printf("Employee age: %d\n", employeeList[i].Age)
-		fmt.Printf("Employee position: %s\n", employeeList[i].Position)
-		fmt.Printf("Employee name: %.2f\n", employeeList[i].Salary)
+func printTable(people []Employee) {
+	for i := range people {
+		fmt.Printf("Employee name: %s\n", people[i].Name)
+		fmt.Printf("Employee age: %d\n", people[i].Age)
+		fmt.Printf("Employee position: %s\n", people[i].Position)
+		fmt.Printf("Employee name: %.2f\n", people[i].Salary)
 	}
 }
 
@@ -221,5 +221,5 @@ func main() {
 	addEmployee("Bob", 40, "Sales", 1500.00)
 	updateMap()
 	fmt.Println(posSal)
-	printTable()
+	printTable(employeeList)
 }
