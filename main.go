@@ -163,9 +163,9 @@ import (
 
 // Lesson 7 Homework
 
-// type PrintableI interface{
-// 	Print()
-// }
+type PrintableI interface {
+	Print()
+}
 
 type Employee struct {
 	Name     string
@@ -191,6 +191,13 @@ func printTable(people []Employee) {
 		// fmt.Printf("Employee name: %.2f\n", people[i].Salary)
 		fmt.Println("---------------------------------------------------------------------")
 	}
+}
+
+func (e Employee) Print() {
+	fmt.Printf("Employee name: %s\n", e.Name)
+	fmt.Printf("Employee age: %d\n", e.Age)
+	fmt.Printf("Employee position: %s\n", e.Position)
+	fmt.Printf("Employee name: %.2f\n", e.Salary)
 }
 
 var employee1 = Employee{
@@ -225,4 +232,8 @@ func main() {
 	updateMap()
 	fmt.Println(posSal)
 	printTable(employeeList)
+	var eFirst PrintableI
+	First := employeeList[1]
+	eFirst = First
+	eFirst.Print()
 }
