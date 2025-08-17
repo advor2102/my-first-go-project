@@ -236,4 +236,7 @@ func main() {
 	First := employeeList[1]
 	eFirst = First
 	eFirst.Print()
+	for i := range employeeList {
+		employeeList[i].Print()
+	}
 }
