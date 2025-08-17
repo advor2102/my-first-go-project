@@ -183,10 +183,13 @@ func (e Employee) info() {
 
 func printTable(people []Employee) {
 	for i := range people {
-		fmt.Printf("Employee name: %s\n", people[i].Name)
-		fmt.Printf("Employee age: %d\n", people[i].Age)
-		fmt.Printf("Employee position: %s\n", people[i].Position)
-		fmt.Printf("Employee name: %.2f\n", people[i].Salary)
+		fmt.Println("Serial number:", i)
+		people[i].info()
+		// fmt.Printf("Employee name: %s\n", people[i].Name)
+		// fmt.Printf("Employee age: %d\n", people[i].Age)
+		// fmt.Printf("Employee position: %s\n", people[i].Position)
+		// fmt.Printf("Employee name: %.2f\n", people[i].Salary)
+		fmt.Println("---------------------------------------------------------------------")
 	}
 }
 
