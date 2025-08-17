@@ -230,6 +230,14 @@ func findEmployee(eName string) {
 	fmt.Printf("Employee %s not found\n", eName)
 }
 
+func avrAge() {
+	var sum int
+	for i := range employeeList {
+		sum += employeeList[i].Age
+	}
+	fmt.Println(sum / len(employeeList))
+}
+
 func main() {
 	employeeList = append(employeeList, employee1)
 	fmt.Println(employeeList)
@@ -251,4 +259,5 @@ func main() {
 	}
 	findEmployee("Jack")
 	findEmployee("Sarah")
+	avrAge()
 }
