@@ -220,6 +220,16 @@ func updateMap() {
 	}
 }
 
+func findEmployee(eName string) {
+	for i := range employeeList {
+		if employeeList[i].Name == eName {
+			fmt.Println("Employee found:")
+			employeeList[i].info()
+		}
+	}
+	fmt.Printf("Employee %s not found\n", eName)
+}
+
 func main() {
 	employeeList = append(employeeList, employee1)
 	fmt.Println(employeeList)
@@ -239,4 +249,6 @@ func main() {
 	for i := range employeeList {
 		employeeList[i].Print()
 	}
+	findEmployee("Jack")
+	findEmployee("Sarah")
 }
