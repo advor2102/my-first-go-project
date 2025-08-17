@@ -194,10 +194,7 @@ func printTable(people []Employee) {
 }
 
 func (e Employee) Print() {
-	fmt.Printf("Employee name: %s\n", e.Name)
-	fmt.Printf("Employee age: %d\n", e.Age)
-	fmt.Printf("Employee position: %s\n", e.Position)
-	fmt.Printf("Employee name: %.2f\n", e.Salary)
+	e.info()
 }
 
 var employee1 = Employee{
