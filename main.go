@@ -195,6 +195,7 @@ func printTable(people []Employee) {
 
 func (e Employee) Print() {
 	e.info()
+	fmt.Println("_______________________________________________________________________")
 }
 
 var employee1 = Employee{
