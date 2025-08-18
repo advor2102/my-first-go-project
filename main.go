@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Lesson 4 Homework
 
@@ -77,85 +79,183 @@ import "fmt"
 
 // Lesson 6 Homework
 
-type Person struct {
-	Name   string
-	Salary int
+// type Person struct {
+// 	Name   string
+// 	Salary int
+// }
+
+// var arr = [5]int{1, 2, 3, 4, 5}
+// var slice = []int{1, 2, 3, 4, 5}
+// var ages = map[string]int{
+// 	"Ann":   30,
+// 	"John":  45,
+// 	"Marie": 28,
+// }
+// var employee = Person{
+// 	Name:   "Jorge",
+// 	Salary: 1000,
+// }
+// var namesList = []string{"Ann", "Bob", "John", "Michael", "Bob", "Ann", "Lisa", "Bob"}
+
+// func sum(fTerm int, sTerm int) int {
+// 	sum := fTerm + sTerm
+// 	return sum
+// }
+
+// func doubling(nums []int) []int {
+// 	doubleSlice := make([]int, len(nums))
+// 	for i, v := range nums {
+// 		doubleSlice[i] = v * 2
+// 	}
+// 	return doubleSlice
+// }
+
+// func division(dividend int, devisor int) (int, float64) {
+// 	quotient := dividend / devisor
+// 	remainder := dividend % devisor
+// 	return quotient, float64(remainder)
+// }
+
+// func unite(fSlice []int, sSlice []int) []int {
+// 	fSlice = append(fSlice, sSlice...)
+// 	return fSlice
+// }
+
+// func usingFunc(n int, f func(int) int) int {
+// 	return f(n)
+// }
+
+// func perimeter(a int) int {
+// 	return 2 * a
+// }
+
+// func nameCounter(people []string) map[string]int {
+// 	counter := make(map[string]int)
+// 	for _, v := range people {
+// 		counter[v] += 1
+// 	}
+// 	return counter
+// }
+
+// func main() {
+// 	fmt.Println(sum(5, 6))
+// 	fmt.Println(division(10, 3))
+// 	fmt.Println(arr)
+// 	fmt.Println(slice)
+// 	newSlice := doubling(slice)
+// 	fmt.Println(slice)
+// 	fmt.Println(newSlice)
+// 	fmt.Println(unite(slice, newSlice))
+// 	fmt.Println(ages)
+// 	delete(ages, "Ann")
+// 	value, exists := ages["Ann"]
+// 	if exists {
+// 		fmt.Println(value)
+// 	} else {
+// 		fmt.Println("No data")
+// 	}
+// 	fmt.Println(ages)
+// 	fmt.Println(employee)
+// 	b := usingFunc(5, perimeter)
+// 	fmt.Println(b)
+// 	fmt.Println(nameCounter(namesList))
+// }
+
+// Lesson 7 Homework
+
+type PrintableI interface {
+	Print()
 }
 
-var arr = [5]int{1, 2, 3, 4, 5}
-var slice = []int{1, 2, 3, 4, 5}
-var ages = map[string]int{
-	"Ann":   30,
-	"John":  45,
-	"Marie": 28,
-}
-var employee = Person{
-	Name:   "Jorge",
-	Salary: 1000,
-}
-var namesList = []string{"Ann", "Bob", "John", "Michael", "Bob", "Ann", "Lisa", "Bob"}
-
-func sum(fTerm int, sTerm int) int {
-	sum := fTerm + sTerm
-	return sum
+type Employee struct {
+	Name     string
+	Age      int
+	Position string
+	Salary   float64
 }
 
-func doubling(nums []int) []int {
-	doubleSlice := make([]int, len(nums))
-	for i, v := range nums {
-		doubleSlice[i] = v * 2
+func (e Employee) info() {
+	fmt.Printf("Employee name: %s\n", e.Name)
+	fmt.Printf("Employee age: %d\n", e.Age)
+	fmt.Printf("Employee position: %s\n", e.Position)
+	fmt.Printf("Employee name: %.2f\n", e.Salary)
+}
+
+func printTable(people []Employee) {
+	for i := range people {
+		fmt.Println("Serial number:", i)
+		people[i].info()
+		// fmt.Printf("Employee name: %s\n", people[i].Name)
+		// fmt.Printf("Employee age: %d\n", people[i].Age)
+		// fmt.Printf("Employee position: %s\n", people[i].Position)
+		// fmt.Printf("Employee name: %.2f\n", people[i].Salary)
+		fmt.Println("---------------------------------------------------------------------")
 	}
-	return doubleSlice
 }
 
-func division(dividend int, devisor int) (int, float64) {
-	quotient := dividend / devisor
-	remainder := dividend % devisor
-	return quotient, float64(remainder)
+func (e Employee) Print() {
+	e.info()
+	fmt.Println("_______________________________________________________________________")
 }
 
-func unite(fSlice []int, sSlice []int) []int {
-	fSlice = append(fSlice, sSlice...)
-	return fSlice
+var employee1 = Employee{
+	Name:     "John",
+	Age:      35,
+	Position: "Manager",
+	Salary:   1000,
+}
+var employeeList []Employee
+var posSal = make(map[string]float64)
+
+func addEmployee(name string, age int, position string, salary float64) {
+	newEmployee := Employee{Name: name, Age: age, Position: position, Salary: salary}
+	employeeList = append(employeeList, newEmployee)
 }
 
-func usingFunc(n int, f func(int) int) int {
-	return f(n)
-}
-
-func perimeter(a int) int {
-	return 2 * a
-}
-
-func nameCounter(people []string) map[string]int {
-	counter := make(map[string]int)
-	for _, v := range people {
-		counter[v] += 1
+func updateMap() {
+	for i := range employeeList {
+		posSal[employeeList[i].Position] = employeeList[i].Salary
 	}
-	return counter
+}
+
+func findEmployee(eName string) {
+	for i := range employeeList {
+		if employeeList[i].Name == eName {
+			fmt.Println("Employee found:")
+			employeeList[i].info()
+		}
+	}
+	fmt.Printf("Employee %s not found\n", eName)
+}
+
+func avrAge() {
+	var sum int
+	for i := range employeeList {
+		sum += employeeList[i].Age
+	}
+	fmt.Println(sum / len(employeeList))
 }
 
 func main() {
-	fmt.Println(sum(5, 6))
-	fmt.Println(division(10, 3))
-	fmt.Println(arr)
-	fmt.Println(slice)
-	newSlice := doubling(slice)
-	fmt.Println(slice)
-	fmt.Println(newSlice)
-	fmt.Println(unite(slice, newSlice))
-	fmt.Println(ages)
-	delete(ages, "Ann")
-	value, exists := ages["Ann"]
-	// fmt.Println(value, exist)
-	if exists {
-		fmt.Println(value)
-	} else {
-		fmt.Println("No data")
+	employeeList = append(employeeList, employee1)
+	fmt.Println(employeeList)
+	addEmployee("Sarah", 25, "Account", 500.00)
+	fmt.Println(employeeList)
+	updateMap()
+	fmt.Println(posSal)
+	employeeList[0].info()
+	addEmployee("Bob", 40, "Sales", 1500.00)
+	updateMap()
+	fmt.Println(posSal)
+	printTable(employeeList)
+	var eFirst PrintableI
+	First := employeeList[1]
+	eFirst = First
+	eFirst.Print()
+	for i := range employeeList {
+		employeeList[i].Print()
 	}
-	fmt.Println(ages)
-	fmt.Println(employee)
-	b := usingFunc(5, perimeter)
-	fmt.Println(b)
-	fmt.Println(nameCounter(namesList))
+	findEmployee("Jack")
+	findEmployee("Sarah")
+	avrAge()
 }
