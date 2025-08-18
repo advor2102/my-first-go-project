@@ -236,10 +236,26 @@ func avrAge() {
 	fmt.Println(sum / len(employeeList))
 }
 
+func avrSalary() {
+	//var sum int
+	avrPosSalSum := make(map[string]int)
+	avrPosSalCount := make(map[string]int)
+	avrPosSal := make(map[string]int)
+	for i := range employeeList {
+		avrPosSalSum[employeeList[i].Position] += int(employeeList[i].Salary)
+		avrPosSalCount[employeeList[i].Position] += 1
+	}
+	for i := range avrPosSalSum {
+		avrPosSal[i] = avrPosSalSum[i] / avrPosSalCount[i]
+	}
+	fmt.Println(avrPosSal)
+	//fmt.Println(sum / len(employeeList))
+}
+
 func main() {
 	employeeList = append(employeeList, employee1)
 	fmt.Println(employeeList)
-	addEmployee("Sarah", 25, "Account", 500.00)
+	addEmployee("Sarah", 25, "Sales", 500.00)
 	fmt.Println(employeeList)
 	updateMap()
 	fmt.Println(posSal)
@@ -258,4 +274,5 @@ func main() {
 	findEmployee("Jack")
 	findEmployee("Sarah")
 	avrAge()
+	avrSalary()
 }
