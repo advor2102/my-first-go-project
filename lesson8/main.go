@@ -40,7 +40,7 @@ func dSecondFile(wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-func dFirdFile(wg *sync.WaitGroup) {
+func dThirdFile(wg *sync.WaitGroup) {
 	time.Sleep(500 * time.Millisecond)
 	fmt.Println("file3 loaded")
 	wg.Done()
@@ -65,6 +65,6 @@ func main() {
 	wg.Wait()
 
 	wg.Add(1)
-	dFirdFile(&wg)
+	dThirdFile(&wg)
 	wg.Wait()
 }
