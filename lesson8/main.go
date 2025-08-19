@@ -5,6 +5,8 @@ import (
 	"sync"
 )
 
+// 1. Печать чисел в двух горутинах
+
 func oddN(nums []int, wg *sync.WaitGroup) {
 	for _, v := range nums {
 		if v%2 == 0 {
