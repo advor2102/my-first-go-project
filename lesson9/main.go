@@ -5,14 +5,17 @@ import (
 )
 
 func addValToChan(ch chan int) {
+	defer close(ch)
 	for i := 0; i <= 20; i++ {
 		ch <- i
+		fmt.Println("Added: ", i)
 	}
 }
 
 func readValFromChan(ch chan int) {
 	for num := range ch {
-		fmt.Println(num)
+		fmt.Println("Printed: ", num)
+
 	}
 }
 func main() {
