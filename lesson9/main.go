@@ -24,7 +24,7 @@ func sendToFirstCahnel(ch1 chan string) {
 	defer close(ch1)
 	for i := 1; i <= 10; i++ {
 		ch1 <- fmt.Sprintf("ch1: %d", i)
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(2000 * time.Millisecond)
 	}
 }
 
@@ -32,7 +32,7 @@ func sendToSecCahnel(ch2 chan string) {
 	defer close(ch2)
 	for i := 1; i <= 20; i++ {
 		ch2 <- fmt.Sprintf("ch2: %d", i)
-		time.Sleep(300 * time.Millisecond)
+		time.Sleep(2000 * time.Millisecond)
 	}
 }
 
@@ -44,6 +44,7 @@ func main() {
 	readValFromChan(ch)
 	go sendToFirstCahnel(ch1)
 	go sendToSecCahnel(ch2)
+	timeout := time.After(1500 * time.Millisecond)
 	for ch1 != nil || ch2 != nil {
 		select {
 		case massage, ok := <-ch1:
@@ -53,6 +54,7 @@ func main() {
 				continue
 			}
 			fmt.Println("Received:", massage)
+			timeout = time.After(1500 * time.Millisecond)
 		case massage, ok := <-ch2:
 			if !ok {
 				ch2 = nil
@@ -60,6 +62,10 @@ func main() {
 				continue
 			}
 			fmt.Println("Received:", massage)
+			timeout = time.After(1500 * time.Millisecond)
+		case <-timeout:
+			fmt.Println("Timeout: no data received for 1.5 seconds, exiting")
+			return
 		}
 	}
 }
