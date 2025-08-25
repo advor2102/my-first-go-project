@@ -44,7 +44,7 @@ func main() {
 	readValFromChan(ch)
 	go sendToFirstCahnel(ch1)
 	go sendToSecCahnel(ch2)
-	timeout := time.After(1500 * time.Millisecond)
+	timer := time.NewTimer(1500 * time.Millisecond)
 	for ch1 != nil || ch2 != nil {
 		select {
 		case massage, ok := <-ch1:
@@ -54,7 +54,13 @@ func main() {
 				continue
 			}
 			fmt.Println("Received:", massage)
-			timeout = time.After(1500 * time.Millisecond)
+			if !timer.Stop() {
+				select {
+				case <-timer.C:
+				default:
+				}
+			}
+			timer.Reset(1500 * time.Millisecond)
 		case massage, ok := <-ch2:
 			if !ok {
 				ch2 = nil
@@ -62,8 +68,14 @@ func main() {
 				continue
 			}
 			fmt.Println("Received:", massage)
-			timeout = time.After(1500 * time.Millisecond)
-		case <-timeout:
+			if !timer.Stop() {
+				select {
+				case <-timer.C:
+				default:
+				}
+			}
+			timer.Reset(1500 * time.Millisecond)
+		case <-timer.C:
 			fmt.Println("Timeout: no data received for 1.5 seconds, exiting")
 			return
 		}
