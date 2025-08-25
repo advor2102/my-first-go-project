@@ -38,7 +38,7 @@ func sendToSecCahnel(ch2 chan string) {
 
 func loadData(resultCh chan<- string) {
 	fmt.Println("Loading data...")
-	time.Sleep(2 * time.Second)
+	time.Sleep(5 * time.Second)
 	resultCh <- "Data loaded successful"
 }
 
@@ -89,10 +89,6 @@ func main() {
 	// }
 	go loadData(resultCh)
 	fmt.Println("Waiting...")
-	select {
-	case result := <-resultCh:
-		fmt.Println("Result:", result)
-	case <-time.After(3 * time.Second):
-		fmt.Println("Timout: no data received for 3 seconds")
-	}
+	result := <-resultCh
+	fmt.Println("Result:", result)
 }
