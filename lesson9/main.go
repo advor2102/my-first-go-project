@@ -78,6 +78,19 @@ func wContext(ctx context.Context) error {
 	}
 }
 
+func wContextCancel(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println("Canceled", ctx.Err())
+			return
+		default:
+			fmt.Println("Working")
+			time.Sleep(500 * time.Millisecond)
+		}
+	}
+}
+
 func main() {
 	// ch := make(chan int, 5)
 	// ch1 := make(chan string)
@@ -132,12 +145,19 @@ func main() {
 	// for r := range results {
 	// 	fmt.Println(r)
 	// }
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-	defer cancel()
-	err := wContext(ctx)
-	if err != nil {
-		fmt.Println("Error:", err)
-	} else {
-		fmt.Println("Success")
-	}
+	// ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	// defer cancel()
+	// err := wContext(ctx)
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// } else {
+	// 	fmt.Println("Success")
+	// }
+	ctx, cancel := context.WithCancel(context.Background())
+	go wContextCancel(ctx)
+	time.Sleep(2 * time.Second)
+	fmt.Println("Cancel func")
+	cancel()
+	time.Sleep(1 * time.Second)
+	fmt.Println("Finish")
 }
