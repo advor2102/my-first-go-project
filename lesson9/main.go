@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -40,6 +41,30 @@ func loadData(resultCh chan<- string) {
 	fmt.Println("Loading data...")
 	time.Sleep(5 * time.Second)
 	resultCh <- "Data loaded successful"
+}
+
+func wGenerator(w int, results chan<- string) {
+	msg := fmt.Sprintf("Worker %d", w)
+	results <- msg
+}
+
+func collect(n int) []string {
+	results := make(chan string, n)
+	var wg sync.WaitGroup
+	var collector []string
+	wg.Add(n)
+	for i := 1; i <= n; i++ {
+		go func(wID int) {
+			defer wg.Done()
+			wGenerator(wID, results)
+		}(i)
+	}
+	wg.Wait()
+	close(results)
+	for r := range results {
+		collector = append(collector, r)
+	}
+	return collector
 }
 
 func main() {
@@ -86,9 +111,14 @@ func main() {
 	// 		return
 	// 	}
 	// }
-	resultCh := make(chan string)
-	go loadData(resultCh)
-	fmt.Println("Waiting...")
-	result := <-resultCh
-	fmt.Println("Result:", result)
+	// resultCh := make(chan string)
+	// go loadData(resultCh)
+	// fmt.Println("Waiting...")
+	// result := <-resultCh
+	// fmt.Println("Result:", result)
+	results := collect(5)
+	fmt.Println("Results:")
+	for r := range results {
+		fmt.Println(r)
+	}
 }
