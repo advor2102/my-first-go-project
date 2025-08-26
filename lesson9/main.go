@@ -1,0 +1,190 @@
+package main
+
+import (
+	"context"
+	"fmt"
+	"sync"
+	"time"
+)
+
+func addValToChan(ch chan int) {
+	defer close(ch)
+	for i := 0; i <= 20; i++ {
+		ch <- i
+		fmt.Println("Added: ", i)
+	}
+}
+
+func readValFromChan(ch chan int) {
+	for num := range ch {
+		fmt.Println("Printed: ", num)
+
+	}
+}
+
+func sendToFirstCahnel(ch1 chan string) {
+	defer close(ch1)
+	for i := 1; i <= 10; i++ {
+		ch1 <- fmt.Sprintf("ch1: %d", i)
+		time.Sleep(2000 * time.Millisecond)
+	}
+}
+
+func sendToSecCahnel(ch2 chan string) {
+	defer close(ch2)
+	for i := 1; i <= 20; i++ {
+		ch2 <- fmt.Sprintf("ch2: %d", i)
+		time.Sleep(2000 * time.Millisecond)
+	}
+}
+
+func loadData(resultCh chan<- string) {
+	fmt.Println("Loading data...")
+	time.Sleep(5 * time.Second)
+	resultCh <- "Data loaded successful"
+}
+
+func wGenerator(w int, results chan<- string) {
+	msg := fmt.Sprintf("Worker %d", w)
+	results <- msg
+}
+
+func collect(n int) []string {
+	results := make(chan string, n)
+	var wg sync.WaitGroup
+	var collector []string
+	wg.Add(n)
+	for i := 1; i <= n; i++ {
+		go func(wID int) {
+			defer wg.Done()
+			wGenerator(wID, results)
+		}(i)
+	}
+	wg.Wait()
+	close(results)
+	for r := range results {
+		collector = append(collector, r)
+	}
+	return collector
+}
+
+func wContext(ctx context.Context) error {
+	select {
+	case <-time.After(5 * time.Second):
+		fmt.Println("Success")
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
+func wContextCancel(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println("Canceled", ctx.Err())
+			return
+		default:
+			fmt.Println("Working")
+			time.Sleep(500 * time.Millisecond)
+		}
+	}
+}
+
+func worker(id int, jobs <-chan int, results chan<- int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for num := range jobs {
+		fmt.Printf("Worker %d processing job %d\n", id, num)
+		results <- num * 2
+	}
+}
+
+func main() {
+	// ch := make(chan int, 5)
+	// ch1 := make(chan string)
+	// ch2 := make(chan string)
+	// go addValToChan(ch)
+	// readValFromChan(ch)
+	// go sendToFirstCahnel(ch1)
+	// go sendToSecCahnel(ch2)
+	// timer := time.NewTimer(1500 * time.Millisecond)
+	// for ch1 != nil || ch2 != nil {
+	// 	select {
+	// 	case massage, ok := <-ch1:
+	// 		if !ok {
+	// 			ch1 = nil
+	// 			fmt.Println("ch1 closed")
+	// 			continue
+	// 		}
+	// 		fmt.Println("Received:", massage)
+	// 		if !timer.Stop() {
+	// 			select {
+	// 			case <-timer.C:
+	// 			default:
+	// 			}
+	// 		}
+	// 		timer.Reset(1500 * time.Millisecond)
+	// 	case massage, ok := <-ch2:
+	// 		if !ok {
+	// 			ch2 = nil
+	// 			fmt.Println("ch2 closed")
+	// 			continue
+	// 		}
+	// 		fmt.Println("Received:", massage)
+	// 		if !timer.Stop() {
+	// 			select {
+	// 			case <-timer.C:
+	// 			default:
+	// 			}
+	// 		}
+	// 		timer.Reset(1500 * time.Millisecond)
+	// 	case <-timer.C:
+	// 		fmt.Println("Timeout: no data received for 1.5 seconds")
+	// 		return
+	// 	}
+	// }
+	// resultCh := make(chan string)
+	// go loadData(resultCh)
+	// fmt.Println("Waiting...")
+	// result := <-resultCh
+	// fmt.Println("Result:", result)
+	// results := collect(5)
+	// fmt.Println("Results:")
+	// for r := range results {
+	// 	fmt.Println(r)
+	// }
+	// ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	// defer cancel()
+	// err := wContext(ctx)
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// } else {
+	// 	fmt.Println("Success")
+	// }
+	// ctx, cancel := context.WithCancel(context.Background())
+	// go wContextCancel(ctx)
+	// time.Sleep(2 * time.Second)
+	// fmt.Println("Cancel func")
+	// cancel()
+	// time.Sleep(1 * time.Second)
+	// fmt.Println("Finish")
+	jobs := make(chan int, 3)
+	results := make(chan int, 3)
+	var wg sync.WaitGroup
+	for w := 1; w <= 3; w++ {
+		wg.Add(1)
+		go worker(w, jobs, results, &wg)
+	}
+	for j := 1; j <= 3; j++ {
+		jobs <- j
+	}
+	close(jobs)
+	go func() {
+		wg.Wait()
+		close(results)
+	}()
+	for res := range results {
+		fmt.Println("Result:", res)
+	}
+	fmt.Println("Finished")
+}
