@@ -46,7 +46,6 @@ func main() {
 	// ch := make(chan int, 5)
 	// ch1 := make(chan string)
 	// ch2 := make(chan string)
-	resultCh := make(chan string)
 	// go addValToChan(ch)
 	// readValFromChan(ch)
 	// go sendToFirstCahnel(ch1)
@@ -87,6 +86,7 @@ func main() {
 	// 		return
 	// 	}
 	// }
+	resultCh := make(chan string)
 	go loadData(resultCh)
 	fmt.Println("Waiting...")
 	result := <-resultCh
