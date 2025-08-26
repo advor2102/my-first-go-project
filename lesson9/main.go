@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"sync"
 	"time"
@@ -67,6 +68,16 @@ func collect(n int) []string {
 	return collector
 }
 
+func wContext(ctx context.Context) error {
+	select {
+	case <-time.After(5 * time.Second):
+		fmt.Println("Success")
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
+	}
+}
+
 func main() {
 	// ch := make(chan int, 5)
 	// ch1 := make(chan string)
@@ -116,9 +127,17 @@ func main() {
 	// fmt.Println("Waiting...")
 	// result := <-resultCh
 	// fmt.Println("Result:", result)
-	results := collect(5)
-	fmt.Println("Results:")
-	for r := range results {
-		fmt.Println(r)
+	// results := collect(5)
+	// fmt.Println("Results:")
+	// for r := range results {
+	// 	fmt.Println(r)
+	// }
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	err := wContext(ctx)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Success")
 	}
 }
