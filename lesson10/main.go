@@ -24,8 +24,8 @@ func loadConfigJSON(path string) ([]User, error) {
 }
 
 func main() {
-	file := `C:\Users\AlexanderDvornikov\golang_course\my-first-go-project\lesson10\config.json`
-	data, err := loadConfigJSON(file)
+	fileJSON := `C:\Users\AlexanderDvornikov\golang_course\my-first-go-project\lesson10\config.json`
+	data, err := loadConfigJSON(fileJSON)
 	if err != nil {
 		fmt.Println(err)
 	}
