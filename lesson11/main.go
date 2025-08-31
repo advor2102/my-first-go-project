@@ -36,7 +36,6 @@ func greet(w http.ResponseWriter, r *http.Request) {
 		user User
 		resp UserResponse
 	)
-
 	w.Header().Set("Content-Type", "application/json")
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
