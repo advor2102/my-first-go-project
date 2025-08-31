@@ -16,9 +16,9 @@ type UserResponse struct {
 }
 
 func main() {
+	fmt.Println("Started listening port: 8081")
 	http.HandleFunc("/echo", helloBody)
 	http.HandleFunc("/greet", greet)
-	fmt.Println("Started listening port: 8081")
 	http.ListenAndServe(":8081", nil)
 }
 
