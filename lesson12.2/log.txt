@@ -1,0 +1,12 @@
+2025/09/05 08:17:58 hello
+2025/09/05 08:18:00 hi
+2025/09/05 08:18:06 QuePasa
+2025/09/05 08:18:09 привет
+2025/09/05 08:19:42 llllll
+2025/09/05 08:19:43 aaaaa
+2025/09/05 08:19:45 wwwww
+2025/09/05 08:30:22 Scanning started. Type 'exit' if you want to stop
+2025/09/05 08:30:32 ghbdtrn]
+2025/09/05 08:30:33 asfddasfas
+2025/09/05 08:30:34 dfsdfa
+2025/09/05 08:30:38 Logging process was stopped
