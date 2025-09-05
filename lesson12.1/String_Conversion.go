@@ -18,7 +18,6 @@ func main() {
 	rawText := strings.ToLower(string(data))
 	cleanText := strings.Join(strings.Fields(rawText), " ")
 	words := strings.Fields(cleanText)
-	fmt.Println(words)
 	wordsCount := make(map[string]int)
 	for _, v := range words {
 		cleanWord := strings.TrimFunc(v, func(r rune) bool {
@@ -29,7 +28,6 @@ func main() {
 		}
 		wordsCount[cleanWord]++
 	}
-	fmt.Println(wordsCount)
 	file, err := os.Create(`C:\Users\AlexanderDvornikov\golang_course\my-first-go-project\lesson12\output.txt`)
 	if err != nil {
 		fmt.Println("Creating file error:", err)
